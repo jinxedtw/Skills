@@ -2,9 +2,9 @@
 name: new-version-tag
 description: >-
   Draft Google Play release “What’s new” / update changelog text in the exact
-  multi-locale tagged format Play Console expects. Use when the user says
-  更新日志, 帮我写更新日志, GP 更新日志, Play what’s new, release notes,
-  or /new-version-tag.
+  multi-locale tagged format Play Console expects. Requires a version range
+  such as 1.1.0-1.2.0. Use when the user says 更新日志, 帮我写更新日志,
+  GP 更新日志, Play what’s new, release notes, or /new-version-tag.
 disable-model-invocation: true
 ---
 
@@ -14,12 +14,13 @@ disable-model-invocation: true
 
 ## 规则
 
-1. 先弄清本版改动（用户说明、git log、版本号均可）。信息不够再问，不要空写。
-2. 只输出下方 **9 种语言** 的标签块，不要加标题、说明、markdown 代码围栏或其它包裹。
-3. **标签名与顺序必须与模板完全一致**，Google 才能识别。不要改成别的 locale、不要缺语言、不要调换顺序。
-4. 每种语言 2–5 条要点，每条一行，以 `• `（项目符号 + 空格）开头。
-5. 文案按各语言自然表达，不要整段机翻硬套；专有名词（如 Google Play、RAM、Wi‑Fi）可保留常见写法。
-6. 不要写内部实现细节（类名、PR、厂商 ROM bug 排查过程）；面向普通用户。
+1. **必须先拿到版本区间**：格式为 `旧版本-新版本`，例如 `1.1.0-1.2.0`。用户未给出时先问清，不要开始写日志。
+2. 弄清该版本区间内的改动（用户说明、git log、版本号均可）。信息不够再问，不要空写。
+3. 只输出下方 **9 种语言** 的标签块，不要加标题、说明、markdown 代码围栏或其它包裹。
+4. **标签名与顺序必须与模板完全一致**，Google 才能识别。不要改成别的 locale、不要缺语言、不要调换顺序。
+5. 每种语言 2–5 条要点，每条一行，以 `• `（项目符号 + 空格）开头。
+6. 文案按各语言自然表达，不要整段机翻硬套；专有名词（如 Google Play、RAM、Wi‑Fi）可保留常见写法。
+7. 不要写内部实现细节（类名、PR、厂商 ROM bug 排查过程）；面向普通用户。
 
 ## 输出模板（格式禁止改动）
 
