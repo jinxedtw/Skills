@@ -5,7 +5,6 @@ description: >-
   multi-locale tagged format Play Console expects. Requires a version range
   such as 1.1.0-1.2.0. Use when the user says 更新日志, 帮我写更新日志,
   GP 更新日志, Play what’s new, release notes, or /new-version-tag.
-disable-model-invocation: true
 ---
 
 # Google Play 更新日志
