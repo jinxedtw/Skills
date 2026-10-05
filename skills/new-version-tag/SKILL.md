@@ -1,9 +1,10 @@
 ---
-name: google-play-whats-new
+name: new-version-tag
 description: >-
   Draft Google Play release “What’s new” / update changelog text in the exact
   multi-locale tagged format Play Console expects. Use when the user says
-  更新日志, 帮我写更新日志, GP 更新日志, Play what’s new, or release notes.
+  更新日志, 帮我写更新日志, GP 更新日志, Play what’s new, release notes,
+  or /new-version-tag.
 disable-model-invocation: true
 ---
 
