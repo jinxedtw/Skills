@@ -4,7 +4,7 @@ description: >-
   Draft a Google Play / app-store reply to a user review in the same language as
   the original review (max 350 characters) and supply a Simplified Chinese
   translation (中文对照). For bug or how-to reviews, include a concrete fix or
-  usage steps; for bugs also ask what exactly happened. Use when the user says
+  usage steps. Do not ask for phone model or OS version. Use when the user says
   帮我回复评价, 帮我回复, 回复用户的评价, 回复评价, 用户评价, reply to review, or
   /reply-user-review.
 ---
@@ -24,7 +24,8 @@ description: >-
 结合当前应用真实功能（查代码/已知说明），不要编造未实现能力。
 
 - **询问功能 / 不会用**：在回复里写清具体解决办法或操作路径（点哪里、怎么设）。
-- **Bug / 不能用 / 崩溃**：在回复里写已知的具体解决办法或规避步骤；同时询问发生的具体情况（何时、哪一页、哪一步、机型/系统、是否必现）。细节不够也先给出能给的办法，再请对方补充。
+- **Bug / 不能用 / 崩溃**：在回复里写已知的具体解决办法或规避步骤。流程细节不够时，可问何时、哪一页、哪一步、是否必现。
+- **不要询问手机型号、系统版本**。商店后台已能直接看到这些信息。
 - 其他反馈：礼貌致谢，对得上的点简短回应。
 
 ## 执行
