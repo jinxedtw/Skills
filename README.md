@@ -15,6 +15,7 @@ Android-Skills/
 
 | 目录 | 用途 |
 |------|------|
+| [skills/android-reverse-engineering](skills/android-reverse-engineering/SKILL.md) | Android APK / XAPK / JAR / AAR 反编译、接口与调用链分析，以及 Frida / JNI / SO 分析 |
 | [skills/integrate-adsdk](skills/integrate-adsdk/SKILL.md) | 宿主 Android 工程接入 / 切换广告聚合（AdMob / MAX / TopOn / TradPlus，adSdk AAR） |
 | [skills/complete-pdf-project](skills/complete-pdf-project/SKILL.md) | 以现有 PDF 工程为底板复制新项目：业务照搬、差异化打散、Figma 换 UI、广告走 adSdk |
 | [skills/mobile-app-ui-design](skills/mobile-app-ui-design/SKILL.md) | 移动端界面与流程设计 |
@@ -25,6 +26,7 @@ Android-Skills/
 
 上游：
 
+- https://github.com/CreditTone/android-reverse-engineering-skill
 - https://github.com/ceorkm/mobile-app-ui-design
 - https://github.com/appeeky/aso-skills
 - https://github.com/Appllama/appllama-skills
