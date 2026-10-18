@@ -1,4 +1,4 @@
 interface:
-  display_name: "Google Play商店页本地化"
+  display_name: "Google Play Localization Review"
   short_description: "优化商店页、一次性商品及订阅机翻，按内容类型输出分语言 Excel"
   default_prompt: "使用 $google-play-localization-review 核对并优化这个 Google 机器翻译 CSV 压缩包，按商店页、一次性商品和订阅分别输出 Excel，每种语言一个工作表，保留各自原始列。"

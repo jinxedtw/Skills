@@ -3,7 +3,7 @@ name: google-play-localization-review
 description: 核对并优化 Google Play 机器翻译 CSV 压缩包中的商店页、一次性商品和订阅文案，结合 localization 与 spreadsheets 技能，按内容类型输出多个 Excel，每种语言一个工作表并保留各类 CSV 原始列。适用于商店页与内购订阅多语言校对及翻译包转 XLSX。
 ---
 
-# Google Play商店页本地化
+# Google Play Localization Review
 
 输入 Google 机器翻译 CSV 压缩包，完成商店页、一次性商品、订阅文案的语义、自然度、产品事实及字数核对。按实际包含的内容类型分别交付 Excel，每个文件按语言分工作表。默认沿用下面的格式，不再询问用户选择 CSV 还是 Excel。只要求修改 skill 时，将附件用于结构检查和验证，不自行执行整包翻译。
 
