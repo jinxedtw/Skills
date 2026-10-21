@@ -16,6 +16,16 @@ disable-model-invocation: false
 
 **先定目标平台，再改代码。** 不要默认切到 TradPlus。
 
+**开始执行之前先检查需不需打出 adSdk-release，给用户两个选择，停下来等用户选完再继续。不要先打包，也不要先改宿主。**
+
+1. 用户提供已经打包好的 adSdk-release 路径
+2. 帮用户打包好
+
+| 选择 | 做什么 |
+|------|--------|
+| 1 | 用用户给的 AAR 路径，拷进宿主 `app/libs/adSdk-release.aar`。跳过下面第 1 节打包 |
+| 2 | 信息收集齐后，按第 1 节打包，再替换宿主 AAR |
+
 支持平台：`admob` / `max` / `topon` / `tradplus`。可单平台，也可逗号并存。
 
 依赖坐标、TradPlus adapter 版本规则见 [reference-deps.md](reference-deps.md)。  
@@ -26,7 +36,8 @@ disable-model-invocation: false
 任务进度：
 - [ ] 已确认：当前平台、目标平台（只接一个 / 多平台并存）、是否删除旧平台
 - [ ] 已收集目标平台凭证、广告位、中介清单、Remote Config Key、测试+正式包名、namespace
-- [ ] adsdk 已按目标 enable_platform 打出 AAR（TradPlus 时含 compare_price）
+- [ ] 开始执行前已让用户二选一：提供已打包的 adSdk-release 路径，或由助手打包
+- [ ] adsdk 已按目标 enable_platform 打出 AAR，或已采用用户提供的 AAR（TradPlus 时含 compare_price）
 - [ ] 宿主 libs 已替换 adSdk-release.aar；按目标平台补齐额外 AAR
 - [ ] 已 javap / 列出 {namespace}open 公开类，后续只用这些类名
 - [ ] 已移除不再使用的旧聚合依赖与自定义 Adapter
@@ -72,6 +83,8 @@ MAX 测试 Key / 测试广告位 / 本地 `adConfig.json` 模板见 [reference-d
 
 ## 1. 按目标平台打包 adSdk AAR
 
+**仅当用户选择「帮用户打包好」时执行本节。** 用户已提供 AAR 路径时，不要跑打包脚本，直接用该文件。
+
 在 **adsdk** 工程执行，不是宿主。常见路径：与宿主同级的 `adsdk/`。
 
 编辑 `project.config`：
@@ -104,7 +117,7 @@ sh configure_project.sh
 
 ```
 app/libs/
-├── adSdk-release.aar              # 覆盖为本次打包产物
+├── adSdk-release.aar              # 用户提供的 AAR，或本次打包产物
 └── compare_price-release.aar      # 仅目标含 tradplus：从 adsdk/ad/libs/ 拷入
 ```
 
@@ -340,6 +353,7 @@ NativeAdStyle(
 ## 10. Agent 约束
 
 1. 先确认目标平台，不要默认 TradPlus。  
+1b. 开始执行之前先检查需不需打出 adSdk-release，给用户两个选择：1. 用户提供已经打包好的 adSdk-release 路径；2. 帮用户打包好。未选择前不要打包、不要改宿主。  
 2. 不要只换 AAR 不改依赖。换 AAR 后必须先识别 `{namespace}open` 类名。  
 2b. 目标含 MAX：不要问 SDK Key / 广告位 ID；用 [reference-defaults.md](reference-defaults.md)。广告配置只问 Remote Config Key。  
 3. 不要再造 `AdPlace` enum 或 `NativeType` IntDef；广告位挂 `AdCallbackImp`，样式用 AAR 的 NativeType。  
