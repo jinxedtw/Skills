@@ -24,54 +24,51 @@ description: >-
 
 ## 输出模板（格式禁止改动）
 
-下方尖括号标签必须原样出现在最终输出里；只替换标签内部的 `•` 条目内容。
+下方 14 种语言的尖括号标签必须原样出现在最终输出里；将标签内部的占位提示替换为符合上述规则的更新日志正文。
 
 ```text
 <en-US>
-• First release on Google Play
-• Test phone hardware and system features in one app
-• Auto test, manual checks, device info, RAM status, and app uninstall
+请在此处输入或粘贴 en-US 语言的版本说明
 </en-US>
+<de-DE>
+请在此处输入或粘贴 de-DE 语言的版本说明
+</de-DE>
+<es-ES>
+请在此处输入或粘贴 es-ES 语言的版本说明
+</es-ES>
+<fr-FR>
+请在此处输入或粘贴 fr-FR 语言的版本说明
+</fr-FR>
 <hi-IN>
-• Google Play पर पहली रिलीज़
-• एक ऐप में फ़ोन हार्डवेयर और सिस्टम सुविधाओं की जाँच करें
-• ऑटो टेस्ट, मैन्युअल जाँच, डिवाइस जानकारी, RAM स्थिति और ऐप अनइंस्टॉल
+请在此处输入或粘贴 hi-IN 语言的版本说明
 </hi-IN>
+<id>
+请在此处输入或粘贴 id 语言的版本说明
+</id>
+<it-IT>
+请在此处输入或粘贴 it-IT 语言的版本说明
+</it-IT>
 <ja-JP>
-• Google Play に初公開
-• スマホのハードウェアとシステム機能を1つのアプリでテスト
-• 自動テスト、手動テスト、端末情報、RAM 状態、アプリのアンインストールに対応
+请在此处输入或粘贴 ja-JP 语言的版本说明
 </ja-JP>
 <ko-KR>
-• Google Play 첫 출시
-• 한 앱에서 휴대폰 하드웨어와 시스템 기능을 테스트하세요
-• 자동 테스트, 수동 테스트, 기기 정보, RAM 상태, 앱 삭제 지원
+请在此处输入或粘贴 ko-KR 语言的版本说明
 </ko-KR>
-<zh-TW>
-• 應用程式首次上架 Google Play
-• 一站式檢測手機軟硬體是否正常
-• 支援自動測試、手動測試、裝置資訊、記憶體狀態與解除安裝應用程式
-</zh-TW>
+<pt-BR>
+请在此处输入或粘贴 pt-BR 语言的版本说明
+</pt-BR>
+<ru-RU>
+请在此处输入或粘贴 ru-RU 语言的版本说明
+</ru-RU>
 <th>
-• เปิดตัวครั้งแรกบน Google Play
-• ทดสอบฮาร์ดแวร์และฟีเจอร์ระบบของมือถือในแอปเดียว
-• ทดสอบอัตโนมัติ ทดสอบด้วยตนเอง ข้อมูลอุปกรณ์ สถานะ RAM และถอนการติดตั้งแอป
+请在此处输入或粘贴 th 语言的版本说明
 </th>
 <vi>
-• Phát hành lần đầu trên Google Play
-• Kiểm tra phần cứng và tính năng hệ thống của điện thoại trong một ứng dụng
-• Hỗ trợ kiểm tra tự động, kiểm tra thủ công, thông tin thiết bị, trạng thái RAM và gỡ cài đặt ứng dụng
+请在此处输入或粘贴 vi 语言的版本说明
 </vi>
 <zh-CN>
-• 应用首次上架 Google Play
-• 一站式检测手机软硬件是否正常
-• 支持自动测试、手动测试、设备信息、内存状态与卸载应用
+请在此处输入或粘贴 zh-CN 语言的版本说明
 </zh-CN>
-<it-IT>
-• Prima pubblicazione su Google Play
-• Testa hardware e funzioni di sistema del telefono in un’unica app
-• Test automatici, test manuali, info dispositivo, stato della RAM e disinstallazione app
-</it-IT>
 ```
 
-语言与标签顺序固定为：`en-US` → `hi-IN` → `ja-JP` → `ko-KR` → `zh-TW` → `th` → `vi` → `zh-CN` → `it-IT`。
+语言与标签顺序固定为：`en-US` → `de-DE` → `es-ES` → `fr-FR` → `hi-IN` → `id` → `it-IT` → `ja-JP` → `ko-KR` → `pt-BR` → `ru-RU` → `th` → `vi` → `zh-CN`。
