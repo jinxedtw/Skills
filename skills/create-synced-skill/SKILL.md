@@ -1,9 +1,9 @@
 ---
 name: create-synced-skill
 description: >-
-  按 Cursor Agent Skill 规范新建或更新一个 skill，提交并推送到
+  按 Codex Agent Skill 规范新建或更新一个 skill，提交并推送到
   https://github.com/jinxedtw/Android-Skills 的 skills/ 目录，再在本机
-  ~/.cursor/skills 挂直接链接。Use when the user invokes /create-synced-skill
+  ~/.codex/skills 安装。Use when the user invokes /create-synced-skill
   or asks to create a skill and sync it to the Android-Skills GitHub repository.
 disable-model-invocation: true
 ---
@@ -31,7 +31,7 @@ disable-model-invocation: true
 - 默认 `disable-model-invocation: true`。只有用户明确要求「相关时自动使用」才去掉这一行
 - 只写 Agent 不知道的步骤。`SKILL.md` 少于 500 行
 - 长文档放同级 `reference.md`，从 `SKILL.md` 单层链接
-- 不要写到 `~/.cursor/skills-cursor/`
+- 本机安装目录为 `~/.codex/skills/<name>/`。
 
 ## 落盘
 
@@ -50,14 +50,16 @@ git clone https://github.com/jinxedtw/Android-Skills.git ~/src/Android-Skills
 
 已有同名目录时就地更新，不要再套一层目录。
 
-本机要让 Cursor 扫到。链接必须是 `~/.cursor/skills` 的直接子目录，不要包在别的文件夹里，也不要让链接指向自己：
+本机安装到 Codex 的 `~/.codex/skills/<name>/`，复制整个 skill 目录（含 scripts、references 等资源），不要再套一层目录：
 
 ```bash
-mkdir -p ~/.cursor/skills
-ln -sfn ~/src/Android-Skills/skills/<name> ~/.cursor/skills/<name>
+mkdir -p ~/.codex/skills/<name>
+cp -R ~/src/Android-Skills/skills/<name>/. ~/.codex/skills/<name>/
 ```
 
-若会话上下文里有 user Agent Store，把同一份 `SKILL.md` 再写到该 store 的 `skills/<name>/SKILL.md`。Store 没挂载就跳过，并说明这份只在本机 `~/.cursor/skills`。
+已有同名目录时就地更新。如果安装目录已经是指向该仓库 skill 目录的软链接，仓库更新即生效，跳过复制。
+
+若会话上下文里有 user Agent Store，把同一份 `SKILL.md` 再写到该 store 的 `skills/<name>/SKILL.md`。Store 没挂载就跳过，并说明已安装到本机 `~/.codex/skills`。
 
 ## 推送
 
@@ -76,5 +78,5 @@ ln -sfn ~/src/Android-Skills/skills/<name> ~/.cursor/skills/<name>
 ## 做完告诉用户
 
 - 仓库里的路径 `skills/<name>/`
-- 本机链接 `~/.cursor/skills/<name>`
-- 新开一个 Agent 对话，输入 `/<name>` 才会出现
+- Codex 本机安装路径 `~/.codex/skills/<name>/`
+- 新开一个 Codex 对话，使用 `$<name>` 调用
