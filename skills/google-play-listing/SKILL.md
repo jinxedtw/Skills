@@ -2,16 +2,20 @@
 name: google-play-listing
 description: >-
   Prepare an Android app for Google Play listing: ask for a materials directory,
-  audit code for gaps and policy risks, write an English store description to
-  商店页介绍.txt (max 4000 characters), and capture real-device screenshots into
-  play_screenshots/ and google_play/ (max 8). Use when the user says Google Play
-  listing, Play Store publish, 上架, 商店页, play_screenshots, or /google-play-listing.
+  audit code, generate Privacy Policy.txt and Terms of Service.txt, write an
+  English store description (max 4000 characters) plus a short description
+  (  max 80 characters), capture real-device screenshots (max 8), and record an
+  English-UI feature walkthrough video with no duration target. Do not create Google Docs and do not
+  edit AppConfig. Use when the user says Google Play listing, Play Store
+  publish, 上架, 商店页, 隐私协议, 服务条款, play_screenshots, or /google-play-listing.
 disable-model-invocation: true
 ---
 
 # Google Play Listing
 
-帮助用户完成 Google Play 上架物料与合规检查。先问目录，再检查、写介绍、截图。
+帮助用户完成 Google Play 上架物料与合规检查。先问目录，再检查、写协议 txt、写介绍与短描述、截图、录主流程视频。
+
+**禁止**：创建 / 发布 Google 文档；修改工程里的 `AppConfig`（含 `PRIVACY_URL` / `TERMS_URL`）。协议只生成两个 txt，链接由用户自己挂。
 
 ## 何时使用
 
@@ -20,30 +24,35 @@ disable-model-invocation: true
 - `/google-play-listing`
 - Google Play listing / Play Store publish
 - 上架 / 商店页 / play_screenshots
+- 隐私协议 / 服务条款
 
 ## 必须先做：询问物料目录
 
-向用户询问一个存放物料的目录。未得到明确路径前，不要写 `商店页介绍.txt`，也不要落盘截图。
+向用户询问一个存放物料的目录。未得到明确路径前，不要写介绍/协议/短描述文本，也不要落盘截图或视频。
 
 确认后，在该目录下使用：
 
 ```text
 <物料目录>/
   商店页介绍.txt
+  简短描述.txt
+  Privacy Policy.txt
+  Terms of Service.txt
   play_screenshots/          # 全部真机截图
   play_screenshots/google_play/  # 最多 8 张上线图
+  play_preview/main_flow.mp4     # 英文界面，尽量录全功能（可多段）
 ```
 
 ## 工作流程
 
-按顺序执行；任一步被阻塞（无真机、权限失败、缺隐私链接等）先问用户，不要假装完成。
+按顺序执行；任一步被阻塞（无真机、权限失败、无法切英文等）先问用户，不要假装完成。
 
 ### 1. 检查代码有无缺漏，有没有上架违规的风险点
 
 对照仓库做只读审计，输出风险清单（高/中/低 + 文件位置 + 建议）。至少覆盖：
 
 - Manifest：权限是否最小必要；`exported`、Intent Filter、Deep Link、FileProvider
-- 隐私政策 / 服务条款 URL 是否可访问、非占位、与应用内入口一致
+- 隐私政策 / 服务条款：只核对仓库里现有 URL 是否占位、与应用内入口是否一致；**不要改 `AppConfig`**。若缺失或仍是别的应用，在风险清单里提醒用户自行更新链接
 - 签名：`keystore` / 密码 / `google-services.json` 是否误用占位或误提交密钥
 - 广告 / 追踪：残留广告布局、未用 SDK、Data safety 相关采集是否说清
 - 目标与兼容：`targetSdk`、Android 15 行为（通知、前台服务、分区存储）
@@ -54,7 +63,22 @@ disable-model-invocation: true
 
 更细的检查表见 [reference.md](reference.md)。
 
-### 2. 生成商店页介绍（英文）
+### 2. 生成隐私协议和服务条款 txt
+
+按用户原意执行：只写两个英文 txt，**不要**登录 Google、**不要**建文档、**不要**改 `AppConfig`。
+
+从仓库读取应用名（优先 `AppConfig.Build.APP_NAME`）、包名、权限、广告/统计 SDK、反馈邮箱。用英文写两份完整文档（Play 上架默认英文）：
+
+- `<物料目录>/Privacy Policy.txt`
+- `<物料目录>/Terms of Service.txt`
+
+Privacy Policy 至少含：控制者身份、采集的数据类型与目的、权限用途、第三方 SDK、留存、儿童、用户权利、联系方式、生效日期。
+Terms of Service 至少含：服务说明、许可范围、免责、终止、适用法律、联系方式。
+内容必须与第 1 步审计一致；禁止虚构采集或能力。
+
+写完后告诉用户文件路径，并提醒用户自行发布（Google 文档 / 官网等）后把链接填进 Play Console 和 `AppConfig`。
+
+### 3. 生成商店页介绍与简短描述（英文）
 
 要求（按用户原意执行）：
 
@@ -64,7 +88,15 @@ disable-model-invocation: true
 - 内容基于真实功能与审计结果，禁止虚构未实现能力；可含功能要点、适用场景、权限说明摘要、支持与更新说明
 - 写完后统计字符数并告诉用户；超限必须删减后再保存
 
-### 3. 真机截图 → 商店上线图
+写 `商店页介绍.txt` 的**同时**必须写短描述：
+
+- 也要同时给我写一个简短描述，短描述（80 字符内）
+- 文件名固定：`简短描述.txt`（UTF-8，英文，单行或至多两行）
+- 按 Google Play short description **80 characters** 限制；尽量接近但不得超过 80
+- 写完后统计字符数并告诉用户；超限必须删减后再保存
+- 禁止把长介绍复制进短描述；要能单独读懂核心卖点
+
+### 4. 真机截图 → 商店上线图
 
 要求（按用户原意执行）：
 
@@ -83,12 +115,26 @@ disable-model-invocation: true
 
 截图价值不够或流程走不通时，说明缺什么并问用户。
 
-### 4. 上架过程补充（参照 qrScanner 类应用经验）
+### 5. 真机录制功能演示视频（英文界面）
 
-在 1–3 之外，主动核对并回报：
+在截图之外，必须再录**使用视频**：
+
+- 界面语言必须是 **English**（先在应用内切到 English；不要用中文或其他语言录商店片）
+- **录屏时间不做要求**；尽量把功能都录进去就行（首页、自动/手动测试、设备信息、内存、卸载及其他核心页都过一遍）
+- 不要录调试浮层、权限反复拒绝、个人隐私信息
+- 无真机 / unauthorized / 无法切英文 / `screenrecord` 失败 → **立刻问用户**，不要用模拟器冒充除非用户明确同意
+- 成片保存为 `<物料目录>/play_preview/main_flow.mp4`（H.264 MP4）。`adb screenrecord` 单段最长 180 秒：功能录不完就再录 `main_flow_02.mp4` 等，不要为了时限砍功能
+- 可用本 skill 脚本开始/拉取录屏：
+  - Windows: `scripts/record_play_preview.ps1`
+  - Unix: `scripts/record_play_preview.sh`
+- 录制时用 adb 操作应用；开始 `screenrecord` 后立刻演示功能
+- Play Console 的商店预览视频通常要上传到 YouTube 再填链接：本地 mp4 交给用户，**不要假装已经上了 YouTube**
+
+### 6. 上架过程补充（参照 qrScanner 类应用经验）
+
+在 1–5 之外，主动核对并回报：
 
 - Feature graphic / 高清图标是否就绪（没有则提醒用户准备，不在此强制生成违规素材）
-- Short description（≤80 characters）是否需要一并起草（默认写在回复里，除非用户要求另存文件）
 - What’s new / 版本说明是否需要多语言草稿（用户要时再写）
 - Data safety、权限申报与应用内实际行为是否一致
 - 正式包是否已用正确签名与 Firebase/Google 配置（非 placeholder）
@@ -100,13 +146,17 @@ disable-model-invocation: true
 
 1. 物料目录路径
 2. 合规风险清单（若有阻断项标为必须先修）
-3. `商店页介绍.txt` 路径与英文 character 数
-4. `play_screenshots/` 与 `google_play/` 数量；若未截图写明原因（并已询问用户）
-5. 建议的下一步（修风险 / 上传 Play Console / 补 graphic）
+3. `Privacy Policy.txt` 与 `Terms of Service.txt` 路径（提醒用户自行发布链接，不要改工程）
+4. `商店页介绍.txt` 路径与英文 character 数；`简短描述.txt` 路径与英文 character 数（必须 ≤80）
+5. `play_screenshots/` 与 `google_play/` 数量；若未截图写明原因（并已询问用户）
+6. `play_preview/` 视频路径，以及覆盖了哪些功能；若未录制写明原因（并已询问用户）
+7. 建议的下一步（修风险 / 用户自行挂协议 URL / 上传 Play Console 与 YouTube 预览视频 / 补 graphic）
 
 ## 脚本
 
 - [scripts/capture_play_screenshots.ps1](scripts/capture_play_screenshots.ps1)
 - [scripts/capture_play_screenshots.sh](scripts/capture_play_screenshots.sh)
+- [scripts/record_play_preview.ps1](scripts/record_play_preview.ps1)
+- [scripts/record_play_preview.sh](scripts/record_play_preview.sh)
 
-用法见脚本头部注释。截图文件名由调用方/Agent 在每次 `exec` 时传入。
+用法见脚本头部注释。截图/视频文件名由调用方/Agent 在每次 `exec` 时传入。

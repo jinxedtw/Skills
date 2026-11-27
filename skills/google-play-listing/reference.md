@@ -4,9 +4,8 @@ Agent 执行「代码缺漏 / 上架违规风险」检查时按本节逐项过�
 
 ## Privacy & policy
 
-- [ ] Privacy policy URL opens in browser, not editor-only / placeholder / 404
-- [ ] Terms of use URL same standard
-- [ ] In-app links match store listing URLs
+- [ ] `Privacy Policy.txt` and `Terms of Service.txt` generated in the materials directory (do **not** create Google Docs; do **not** edit `AppConfig`)
+- [ ] Existing `AppConfig` / in-app privacy and terms URLs: report if placeholder, 404, or belonging to another app; user updates links themselves
 - [ ] Data safety answers match actual SDK behavior (Ads, Analytics, Crashlytics, etc.)
 
 ## App identity & signing
@@ -48,8 +47,9 @@ Agent 执行「代码缺漏 / 上架违规风险」检查时按本节逐项过�
 - [ ] Hi-res icon 512×512
 - [ ] Feature graphic 1024×500
 - [ ] Phone screenshots: 2–8 images (this skill fills up to 8 under `google_play/`)
-- [ ] Short description ≤ 80 characters
+- [ ] Short description ≤ 80 characters (this skill’s `简短描述.txt`, written together with the full description)
 - [ ] Full description ≤ 4000 characters (this skill’s `商店页介绍.txt`)
+- [ ] Feature walkthrough video, English UI, no duration target — cover as many features as practical (`play_preview/main_flow.mp4` and extra clips if needed; Play Console promo usually needs a YouTube URL)
 
 ## Screenshot capture notes
 
@@ -57,3 +57,10 @@ Agent 执行「代码缺漏 / 上架违规风险」检查时按本节逐项过�
 - Hide developer overlays / notch cutout debug / demo accounts PII
 - Capture light path the store user will understand without narration
 - `google_play/` must contain **at most 8** images
+
+## Preview video notes
+
+- Switch the **in-app** language to English before recording
+- No duration target; walk through as many product features as practical
+- `adb shell screenrecord` max is 180 seconds per clip — record extra files if needed
+- Hide developer overlays and PII; do not use emulator unless the user agrees
